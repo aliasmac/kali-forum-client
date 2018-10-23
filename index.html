@@ -4,12 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="style.css" rel="stylesheet" type="text/css">
     <title>Document</title>
+    
     <script defer src="./API.js"></script>
+    <script defer src="./kali_controller.js"></script>
+    <script defer src="./post.js"></script>
+    <script defer src="./user.js"></script>
     <script defer src="./index.js"></script>
 </head>
 <body>
-    <h1>Flatiron Feelings: Your Forum</h1>
+    <header>
+        <h1>Flatiron Feelings Forum</h1>
+        <nav>
+            <span>Search</span>
+            <span>Home</span> 
+        </nav>     
+    </header>
 
+    <form id="feelings-form">
+
+            <div class="form-group"></div>
+                <label for="new-quote">Name</label>
+                <input type="text" class="form-control" id="name-input" placeholder="Black Eyed Peas">
+            </div>
+
+            <div class="form-group">
+                <label for="Author">Feelings</label>
+                <input type="text" class="form-control" id="title-input" placeholder="I got a feeling">
+            </div>
+
+            <div class="form-group">
+                <label for="Author">Add a gif</label>
+                <input type="text" class="form-control" id="feeling-input" placeholder="Enter Gif link">
+            </div>
+
+            <div class="form-group">
+                <label for="Author">Add a gif</label>
+                <input type="text" class="form-control" id="media-input" placeholder="Enter Gif link">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+    <div class="posts-div">
+        <div id="accordion-main">
+            <!-- Posts go inside here -->
+
+        </div>
+        <div>
+
+        </div>
+    </div>
+    
 </body>
 </html>
