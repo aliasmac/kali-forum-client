@@ -53,3 +53,15 @@ form {
     padding : 10px;
  }
 
+ .search-area {
+    overflow: scroll; 
+    max-height: 30rem;
+    margin-left: 3rem;
+    border: 2px solid blue;
+    width: 30rem;;
+ }
+
+ .gifs-here {
+     display: flex;
+     flex-wrap: wrap;
+ }
