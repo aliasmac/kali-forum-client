@@ -10,6 +10,8 @@ const feelingInput = document.getElementById('feeling-input')
 const mediaInput = document.getElementById('media-input')
 let newUserId 
 
+
+
 feelingsForm.addEventListener('submit', (e) => {
     event.preventDefault()
 
@@ -22,6 +24,10 @@ feelingsForm.addEventListener('submit', (e) => {
     API.createUser(user)
         .then(function(resp) {
 
+            // console.log(resp)
+
+            KaliController.addUser(resp)
+
             const feelingsObject = {
                 author_id: resp.id,
                 title: titleInputEl.value,
@@ -29,16 +35,14 @@ feelingsForm.addEventListener('submit', (e) => {
                 media_element: mediaInput.value
             } 
 
-
             API.createPost(feelingsObject)
-                .then(KaliController.renderPost)
+                .then(resp => {
+                    
+                    KaliController.addPost(resp)
+                })
             
         })
      
-
-      
-
-    
 
 })
 

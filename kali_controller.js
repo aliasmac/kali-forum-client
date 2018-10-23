@@ -21,13 +21,20 @@ class KaliController {
     }
 
     static renderPost(post) {
+        console.log("Render Post Method")
+  
         let postElement = post.renderPost()
         this.postMain.append(postElement)
+
+        // Comment section
 
         const elComment = document.getElementById(`accordion-${post.id}`)
         elComment.style.display = 'none'
 
-        postElement.addEventListener('click', (e) => {
+        const commentBtn = document.getElementById(`comment-btn-${post.id}`)
+        
+
+        commentBtn.addEventListener('click', (e) => {
             console.log("Working")
             
             if (elComment.style.display === 'none') {
@@ -37,6 +44,38 @@ class KaliController {
             }
 
         })
+
+        // edit section
+
+        const editBtn = document.getElementById(`edit-btn-${post.id}`)
+        const elEdit = document.getElementById(`edit-${post.id}`)
+        elEdit.style.display = 'none'
+
+        editBtn.addEventListener('click', (e) => {
+
+            if (elEdit.style.display === 'none') {
+                elEdit.style.display = 'block'
+            } else if (elEdit.style.display === 'block') {
+                elEdit.style.display = 'none'
+            }
+
+            // const editFormEl = document.getElementById(`edit-form-${this.id}`)
+            // const editInput = document.getElementById(`edit-input-${this.id}`)
+
+      
+        })
+        
+        
+
+        // editFormEl.addEventListener('submit', (e) => {
+            
+        //     event.preventDefault()
+
+        //     const updatedFeelings = editInput.value 
+
+
+
+        // })
     }
 
 
