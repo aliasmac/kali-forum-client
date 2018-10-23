@@ -18,11 +18,11 @@ class API {
         .then(resp => resp.json())
     }
   
-    static createTask (task) {
-      return fetch(this.tasksUrl, {
+    static createUser (user) {
+      return fetch(this.usersUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(task)
+        body: JSON.stringify(user)
       }).then(resp => resp.json())
     }
 
@@ -40,6 +40,7 @@ class API {
     }
     
     static createPost (post) {
+        console.log(post)
         return fetch(this.postsUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

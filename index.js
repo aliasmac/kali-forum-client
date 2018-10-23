@@ -7,23 +7,38 @@ const feelingsForm = document.getElementById('feelings-form')
 const nameInputEl = document.getElementById('name-input')
 const titleInputEl = document.getElementById('title-input')
 const feelingInput = document.getElementById('feeling-input')
-const mediatInput = document.getElementById('media-input')
+const mediaInput = document.getElementById('media-input')
+let newUserId 
 
-
-feelingsForm.addEventListener('click', (e) => {
+feelingsForm.addEventListener('submit', (e) => {
     event.preventDefault()
 
     console.log("Form Active")
 
-    const feelingsObject = {
-        name: nameInputEl.value, 
-        title: titleInputEl.value,
-        feelings: feelingInput.value,
-        media_element: mediatInput.value
+    const user = {
+        name: nameInputEl.value
     }
+   
+    API.createUser(user)
+        .then(function(resp) {
 
-    KaliController.addPost(feelingsObject)
-    API.createPost(feelingsObject)
+            const feelingsObject = {
+                author_id: resp.id,
+                title: titleInputEl.value,
+                feelings: feelingInput.value,
+                media_element: mediaInput.value
+            } 
+
+
+            API.createPost(feelingsObject)
+                .then(KaliController.renderPost)
+            
+        })
+     
+
+      
+
+    
 
 })
 
