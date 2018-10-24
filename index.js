@@ -11,40 +11,54 @@ const mediaInput = document.getElementById('media-input')
 let newUserId 
 
 
+const userSelect = document.getElementById('feeling-name-select')
 
-feelingsForm.addEventListener('submit', (e) => {
+const newUserForm = document.getElementById('new-user-form')
+const newUserInput = document.getElementById('new-user-name')
 
-    
+
+newUserForm.addEventListener('submit', (e) => {
     event.preventDefault()
-
-    console.log("Form Active")
+    console.log("User form active")
 
     const user = {
-        name: nameInputEl.value
+        name: newUserInput.value
     }
-   
+
     API.createUser(user)
         .then(function(resp) {
+                KaliController.addUser(resp)
 
-            // console.log(resp)
+                const userSelect = document.getElementById('feeling-name-select')
+                let userEl = document.createElement('option')
+                userEl.value = resp.id
+                userEl.innerText = resp.name   
+                userSelect.append(userEl)
 
-            KaliController.addUser(resp)
 
-            const feelingsObject = {
-                author_id: resp.id,
-                title: titleInputEl.value,
-                feelings: feelingInput.value,
-                media_element: mediaInput.value
-            } 
 
-            API.createPost(feelingsObject)
-                .then(resp => {
-                    
-                    KaliController.addPost(resp)
-                })
-            
+            }
+        )
+})
+
+
+feelingsForm.addEventListener('submit', (e) => {
+    event.preventDefault()
+
+    console.log("Feelings form Active")
+
+    const feelingsObject = {
+        author_id: userSelect.value,
+        title: titleInputEl.value,
+        feelings: feelingInput.value,
+        media_element: mediaInput.value
+    } 
+
+    // console.log(feelingsObject)
+    API.createPost(feelingsObject)
+        .then(resp => {      
+            KaliController.addPost(resp)
         })
-     
 
 })
 
