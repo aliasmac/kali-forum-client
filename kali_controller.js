@@ -59,23 +59,39 @@ class KaliController {
                 elEdit.style.display = 'none'
             }
 
-            // const editFormEl = document.getElementById(`edit-form-${this.id}`)
-            // const editInput = document.getElementById(`edit-input-${this.id}`)
+            // Edit Patch request
+            
+            // Get form & input
+            const editFormEl = document.getElementById(`edit-form-${post.id}`)
 
+            const titleInput = document.getElementById(`title-input-${post.id}`)
+            const feelingInput = document.getElementById(`feeling-input-${post.id}`)
+            const mediaInput = document.getElementById(`media-input-${post.id}`)
+
+
+            editFormEl.addEventListener('submit', (e) => {
+                event.preventDefault()
+                console.log("Hello")
+
+                const updatedFeelings = {
+                    id: post.id,
+                    title: titleInput.value,
+                    content: feelingInput.value,
+                    media_element: mediaInput.value,
+                    author_id: post.author_id,
+                }
+
+                API.editPost(post.id, updatedFeelings)
+                    .then(resp => console.log(resp)) 
+
+
+
+
+            })
       
         })
         
         
-
-        // editFormEl.addEventListener('submit', (e) => {
-            
-        //     event.preventDefault()
-
-        //     const updatedFeelings = editInput.value 
-
-
-
-        // })
     }
 
 

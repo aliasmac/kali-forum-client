@@ -13,6 +13,8 @@ let newUserId
 
 
 feelingsForm.addEventListener('submit', (e) => {
+
+    
     event.preventDefault()
 
     console.log("Form Active")
