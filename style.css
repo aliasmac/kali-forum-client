@@ -69,3 +69,9 @@ form {
  .lightbox .thumbnail{
      margin: 1em auto;
     }
+
+
+button, input, select, textarea {
+    font-family : inherit;
+    font-size   : 100%;
+    }
