@@ -48,12 +48,21 @@ class API {
         }).then(resp => resp.json())
     }
 
+
+    static editPost (id, post) {
+        return fetch(`${this.postsUrl}/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(post)
+        }).then(resp => resp.json())
+      }
+    
+
     static deletePost (id) {
         return fetch(`${this.postsUrl}/${id}`, {
             method: 'DELETE'
         })
     }
-
 
     // Comments API
 

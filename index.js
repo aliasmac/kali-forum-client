@@ -10,38 +10,55 @@ const feelingInput = document.getElementById('feeling-input')
 const mediaInput = document.getElementById('media-input')
 let newUserId 
 
+
+const userSelect = document.getElementById('feeling-name-select')
+
+const newUserForm = document.getElementById('new-user-form')
+const newUserInput = document.getElementById('new-user-name')
+
+
+newUserForm.addEventListener('submit', (e) => {
+    event.preventDefault()
+    console.log("User form active")
+
+    const user = {
+        name: newUserInput.value
+    }
+
+    API.createUser(user)
+        .then(function(resp) {
+                KaliController.addUser(resp)
+
+                const userSelect = document.getElementById('feeling-name-select')
+                let userEl = document.createElement('option')
+                userEl.value = resp.id
+                userEl.innerText = resp.name   
+                userSelect.append(userEl)
+
+
+
+            }
+        )
+})
+
+
 feelingsForm.addEventListener('submit', (e) => {
     event.preventDefault()
 
-    console.log("Form Active")
+    console.log("Feelings form Active")
 
-    const user = {
-        name: nameInputEl.value
-    }
-   
-    API.createUser(user)
-        .then(function(resp) {
+    const feelingsObject = {
+        author_id: userSelect.value,
+        title: titleInputEl.value,
+        feelings: feelingInput.value,
+        media_element: mediaInput.value
+    } 
 
-            const feelingsObject = {
-                author_id: resp.id,
-                title: titleInputEl.value,
-                feelings: feelingInput.value,
-                media_element: mediaInput.value
-            } 
-
-
-            API.createPost(feelingsObject)
-                .then(function(){
-                    KaliController.renderPost
-                    renderLightbox
-                })
-            
+    // console.log(feelingsObject)
+    API.createPost(feelingsObject)
+        .then(resp => {      
+            KaliController.addPost(resp)
         })
-     
-
-      
-
-    
 
 })
 

@@ -25,26 +25,33 @@
         </nav>     
     </header>
 
+    <form id="new-user-form">
+        <label for="new-user">Create username:</label>
+        <input type="text" id="new-user-name" placeholder="Black Eyed Peas">
+        <button type="submit">Submit</button>
+    </form>
+
     <form id="feelings-form">
 
             <div class="form-group"></div>
-                <label for="new-quote">Name:</label>
-                <input type="text" class="form-control" id="name-input" placeholder="Black Eyed Peas">
+                <select name="users" form="user-form" id="feeling-name-select">        
+                </select>
             </div>
 
             <div class="form-group">
                     <label for="Author">Title:</label>
-                    <input type="text" class="form-control" id="media-input" placeholder="Give you feelings a name">
+                    <input type="text" class="form-control" id="title-input" placeholder="Give your feeling a name">
+                    
                 </div>
 
             <div class="form-group">
                 <label for="Author">Feelings:</label>
-                <textarea rows="4" cols="50"  class="form-control" id="title-input" form="feelings-form">I got a feeling...</textarea>
+                <input type="text" class="form-control" id="feeling-input" placeholder="I got a feeling">
             </div>
 
             <div class="form-group">
                 <label for="Author">Express yourself:</label>
-                <input type="text" class="form-control" id="feeling-input" placeholder="Enter Gif link">
+                <input type="text" class="form-control" id="media-input" placeholder="Enter a gif">
             </div>    
 
             <button type="submit" class="btn btn-primary">Submit</button>

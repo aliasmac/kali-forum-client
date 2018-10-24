@@ -27,6 +27,7 @@ class Post {
     renderPost () {
         
         const postAuthor = User.findById(this.author_id)
+        // https://media1.giphy.com/media/RgpuFRi3bzuGA/giphy.gif
 
         const postEl = document.createElement('div')
         postEl.className = 'post-panel'
@@ -35,19 +36,41 @@ class Post {
                 <h3>Feeling: ${this.title}</h3>
                 <p>The lowdown: ${this.content}</P>
                 <div>
+                    <img 
                     ${this.media_element}
                 </div>
                 <p>Posted by: ${postAuthor.name}, from ${postAuthor.location}</p> 
+
+                <button id="comment-btn-${this.id}" class="comment-btn">View comments!</button>
+                <button id="edit-btn-${this.id}" class="edit-btn">Edit your post</button>
             
                 <div class="accordion-content" id="accordion-${this.id}">
-                    ${this.renderAllComments()}
+                    <div>${this.renderAllComments()}</div>
+                    <div>
+                        <form id="leave-comment-form-${this.id}">
+                            <p>Add your own comment!</p>
+                            <select id="leave-comment-select">
+                            </select>
+                            <input type="text" id="title-input-${this.id}" ></input> 
+                            <input type="submit" value="Add comment">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="edit-form" id="edit-${this.id}" >
+                    <form id="edit-form-${this.id}">
+                        <input type="text" class="form-control" id="title-input-${this.id}" placeholder="${this.title}"></input> 
+                        <input type="text" class="form-control" id="feeling-input-${this.id}" placeholder="${this.content}"></input>       
+                        <input type="text" class="form-control" id="media-input-${this.id}" placeholder="${this.media_element}"></input>  
+                        <input type="submit" value="Edit comment">
+                    </form>
                 </div>
             </div>   
         `
         return postEl
     }
 
-    
+          
 
 }
 

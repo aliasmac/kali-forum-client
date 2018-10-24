@@ -5,7 +5,8 @@ class KaliController {
             .then(post => this.addPosts(post))
 
         API.getUsers()
-            .then(user => this.addUsers(user))    
+            .then(user => this.addUsers(user))
+            .then(() => KaliController.usersToSelect())    
     }
 
     // Posts 
@@ -21,13 +22,20 @@ class KaliController {
     }
 
     static renderPost(post) {
+        console.log("Render Post Method")
+  
         let postElement = post.renderPost()
         this.postMain.append(postElement)
+
+        // Comment section
 
         const elComment = document.getElementById(`accordion-${post.id}`)
         elComment.style.display = 'none'
 
-        postElement.addEventListener('click', (e) => {
+        const commentBtn = document.getElementById(`comment-btn-${post.id}`)
+        
+
+        commentBtn.addEventListener('click', (e) => {
             console.log("Working")
             
             if (elComment.style.display === 'none') {
@@ -36,7 +44,90 @@ class KaliController {
                 elComment.style.display = 'none'
             }
 
+            if (elComment.style.display === 'block') {
+
+                const commentForm = document.getElementById(`leave-comment-form-${post.id}`)
+                const userSelect = document.getElementById('leave-comment-select')
+                userSelect.innerHTML = ""
+
+                KaliController.users.forEach(function(user) { 
+                    let userEl = document.createElement('option')
+                    userEl.value = user.id
+                    userEl.innerText = user.name   
+                    userSelect.append(userEl)
+                })
+
+                const commentInput = document.getElementById(`title-input-${post.id}`)
+
+                commentForm.addEventListener('submit', (e) => {
+                    event.preventDefault()
+
+                    // const commentForm = document.getElementById(`leave-comment-form-${post.id}`)
+
+                    const comment = {
+                        post_id: post.id,
+                        user_id: userSelect.value,
+                        comment: commentInput.value
+                    }
+
+                    API.createPost({comments: comment})
+                    .then(resp => console.log(resp))
+
+                })   
+
+            }
         })
+
+
+
+
+        // edit section
+
+        const editBtn = document.getElementById(`edit-btn-${post.id}`)
+        const elEdit = document.getElementById(`edit-${post.id}`)
+        elEdit.style.display = 'none'
+
+        editBtn.addEventListener('click', (e) => {
+
+            if (elEdit.style.display === 'none') {
+                elEdit.style.display = 'block'
+            } else if (elEdit.style.display === 'block') {
+                elEdit.style.display = 'none'
+            }
+
+            // Edit Patch request
+            
+            // Get form & input
+            const editFormEl = document.getElementById(`edit-form-${post.id}`)
+
+            const titleInput = document.getElementById(`title-input-${post.id}`)
+            const feelingInput = document.getElementById(`feeling-input-${post.id}`)
+            const mediaInput = document.getElementById(`media-input-${post.id}`)
+
+
+            editFormEl.addEventListener('submit', (e) => {
+                event.preventDefault()
+                console.log("Hello")
+
+                const updatedFeelings = {
+                    id: post.id,
+                    title: titleInput.value,
+                    content: feelingInput.value,
+                    media_element: mediaInput.value,
+                    author_id: post.author_id,
+                }
+
+                API.editPost(post.id, updatedFeelings)
+                    .then(resp => console.log(resp)) 
+
+
+
+
+            })
+      
+        })
+        
+        
     }
 
 
@@ -49,6 +140,28 @@ class KaliController {
         const newUser = new User(user)
         this.users.push(newUser)
         // KaliController.renderUser(newUser)
+    }
+
+    static usersToSelect() {
+        this.users.forEach(function(user) {
+            const userSelect = document.getElementById('feeling-name-select')
+            let userEl = document.createElement('option')
+            userEl.value = user.id
+            // charEl.className = `${char.name}-${char.id}`
+            userEl.innerText = user.name   
+            return userSelect.append(userEl)
+        })
+    }
+
+    static userToCommentSelect() {
+        KaliController.users.forEach(function(user) {
+            const userSelect = document.getElementById('leave-comment-select')
+            let userEl = document.createElement('option')
+            userEl.value = user.id
+            // charEl.className = `${char.name}-${char.id}`
+            userEl.innerText = user.name   
+            userSelect.append(userEl)
+        })
     }
 
 
