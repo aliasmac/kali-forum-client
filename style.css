@@ -76,11 +76,6 @@ form {
 
 
 
-
-
-
-
-
 /* Icon bob  */
 
 /* Icon Bob */
@@ -153,3 +148,7 @@ form {
     -webkit-animation-direction: normal, alternate;
     animation-direction: normal, alternate;
   }
+button, input, select, textarea {
+    font-family : inherit;
+    font-size   : 100%;
+    }

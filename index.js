@@ -122,7 +122,7 @@ searchForm.addEventListener('keyup', function(e) {
                     `<tr class="gif-result">
                     <span>
                         <a href="${gif.images.original.url}" target="_blank">
-                            <img src="${gif.images.fixed_width_downsampled.url}" class="gif">
+                            <img src="${gif.images.fixed_width.url}" class="gif">
                         </a>
                         <div>
                         <input type="text" value="${gif.images.original.url}" id="img-url">
@@ -151,8 +151,13 @@ const copyUrl = () => {
         document.execCommand("copy");
         alert("Copied image URL to your clipboard!");
       }
-    
 
+    
+const renderLightbox = () => { const instance = basicLightbox.create(`
+      <img src="https://media.giphy.com/media/l0K4m0mzkJDAIdhHW/giphy.gif">
+  `)
+  instance.show()
+    }
 
 
 
