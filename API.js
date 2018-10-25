@@ -64,8 +64,16 @@ class API {
         })
     }
 
+
     // Comments API
 
+    static addComment (comment) {
+      return fetch(this.commentsUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
+      }).then(resp => resp.json())
+    }
 
 
   }
