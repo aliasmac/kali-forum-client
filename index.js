@@ -3,6 +3,29 @@ console.log("Hello World")
 KaliController.init()
 
 
+// HOMEPAGE FORMATTING SECTION
+
+// const search = document.getElementById('search-area')
+// search.style.display = 'none'
+
+// document.addEventListener('click', (e) => {
+
+//     if (e.target.id === "search") {
+//         const forms = document.getElementById('forms-div')
+//         const posts = document.getElementById('posts-div')
+//         const search = document.getElementById('search-area')
+//         forms.style.display = 'none'
+//         posts.style.display = 'none'
+//         search.style.display = 'block'
+//     }
+
+
+// })
+
+
+
+// FORM FUNCTIONALITY 
+
 const feelingsForm = document.getElementById('feelings-form')
 const nameInputEl = document.getElementById('name-input')
 const titleInputEl = document.getElementById('title-input')
@@ -51,13 +74,15 @@ feelingsForm.addEventListener('submit', (e) => {
         author_id: userSelect.value,
         title: titleInputEl.value,
         feelings: feelingInput.value,
-        media_element: mediaInput.value
+        media_element: mediaInput.value,
+        score: 0
     } 
 
     // console.log(feelingsObject)
     API.createPost(feelingsObject)
         .then(resp => {      
             KaliController.addPost(resp)
+            console.log(resp)
         })
 
 })
@@ -133,9 +158,6 @@ const renderLightbox = () => { const instance = basicLightbox.create(`
   `)
   instance.show()
     }
-
-
-
 
 
 
