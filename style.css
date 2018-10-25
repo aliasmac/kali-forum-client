@@ -71,7 +71,11 @@ form {
     }
 
 
-/* Icon bob  */
+
+button, input, select, textarea {
+    font-family : inherit;
+    font-size   : 100%;
+    }
 
 /* Icon Bob */
 @-webkit-keyframes hvr-icon-bob {
