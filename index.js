@@ -5,22 +5,52 @@ KaliController.init()
 
 // HOMEPAGE FORMATTING SECTION
 
-// const search = document.getElementById('search-area')
-// search.style.display = 'none'
+document.addEventListener('click', (e) => {
 
-// document.addEventListener('click', (e) => {
-
-//     if (e.target.id === "search") {
-//         const forms = document.getElementById('forms-div')
-//         const posts = document.getElementById('posts-div')
-//         const search = document.getElementById('search-area')
-//         forms.style.display = 'none'
-//         posts.style.display = 'none'
-//         search.style.display = 'block'
-//     }
+    const forms = document.getElementById('forms-div')
+    const posts = document.getElementById('posts-div')
+    const search = document.getElementById('search-area-main')
+    const signUpForm = document.getElementById('new-user-form')
+    const feelingzzForm = document.getElementById('feelings-form')
 
 
-// })
+    if (e.target.id === "search") {
+        forms.style.display = 'none'
+        posts.style.display = 'none'
+        search.style.display = 'block'
+
+    }
+
+    if (e.target.id === "forum") {
+        forms.style.display = 'block'
+        posts.style.display = 'block'
+        search.style.display = 'none'
+        
+    }
+
+
+    if (e.target.id === "sign-up") {
+        if (signUpForm.style.display === "none") {
+            signUpForm.style.display = "block"
+        } else {
+            signUpForm.style.display = "none"
+        }   
+    }
+
+    if (e.target.id === "share") {
+        if (feelingzzForm.style.display = "none") {
+            feelingzzForm.style.display = "flex"
+        } else {
+            feelingzzForm.style.display = "none"
+        }
+    }
+
+    // Feeeelingzzz progress bar
+
+    
+
+
+})
 
 
 
@@ -99,7 +129,7 @@ const apiKey = 'rqeTran7daTGoUbORg2UpW6k6Qps2tsK'
 
 
 let output = '';
-gifsFound.innerHTML = 'Search for a gif!';
+// gifsFound.innerHTML = 'Search for a gif!';
 
 searchForm.addEventListener('keyup', function(e) {
     e.preventDefault();
@@ -108,7 +138,7 @@ searchForm.addEventListener('keyup', function(e) {
     output = '';
 
     //Get gifs from Giphy API using user input
-    fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${userQuery}&limit=10`)
+    fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${userQuery}&limit=20`)
         .then(resp => resp.json())
         .then(data => {
             const gifs = data.data;
@@ -119,18 +149,15 @@ searchForm.addEventListener('keyup', function(e) {
             if (gifs.length > 0) {
                 gifs.forEach(gif =>
                     output +=
-                    `<tr class="gif-result">
-                    <span>
-                        <a href="${gif.images.original.url}" target="_blank">
-                            <img src="${gif.images.fixed_width.url}" class="gif">
-                        </a>
+                    `<div class="gif-result" >
+                        <span> <a href="${gif.images.original.url}" target="_blank"><img src="${gif.images.fixed_width.url}" class="gif"></a></span>
                         <div>
-                        <input type="text" value="${gif.images.original.url}" id="img-url">
-                        <button onclick="copyUrl()">Copy URL</button>
-                        <div>
-                        </span>
-                        </tr>`);
-                gifsFound.innerHTML = output;
+                            <input type="text" value="${gif.images.fixed_width.url}" id="img-url">
+                        </div>
+                    </div>`
+                    );
+                    gifOutput.innerHTML = output;
+                    
             } else {
                 gifsFound.innerHTML = '<p>😔 No GIFs Found, please try another search term! 😔</p>';
 
@@ -140,17 +167,18 @@ searchForm.addEventListener('keyup', function(e) {
             gifOutput.innerHTML = `<p>😔 Error: ${err.message} 😔</p>`;
 
         });
-
+   
+        console.log(gifOutput)
 })
 
+{/* <button onclick="copyUrl()">Copy URL</button> */}
 
-
-const copyUrl = () => {
-        var copyText = document.getElementById("img-url");
-        copyText.select();
-        document.execCommand("copy");
-        alert("Copied image URL to your clipboard!");
-      }
+// const copyUrl = () => {
+//         var copyText = document.getElementById("img-url");
+//         copyText.select();
+//         document.execCommand("copy");
+//         alert("Copied image URL to your clipboard!");
+//       }
 
     
 const renderLightbox = () => { const instance = basicLightbox.create(`

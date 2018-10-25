@@ -3,6 +3,7 @@ class KaliController {
     static init() {
         API.getPosts()
             .then(post => this.addPosts(post))
+            .then(() => KaliController.upvoteEventListener())
 
         API.getUsers()
             .then(user => this.addUsers(user))
@@ -10,6 +11,40 @@ class KaliController {
     }
 
     // Posts 
+
+    static upvoteEventListener() {
+        // const postPanel = document.querySelector('.post-panel')
+        console.log("EEEEEEEEEEEE")
+
+        const upvote = document.querySelectorAll('.upvote')
+        const downvote = document.querySelectorAll('.downvote')
+        const progress = document.getElementById('progress')
+        let height = 1
+
+        upvote.forEach(function(btn) {
+            btn.addEventListener('click', (e) => {
+                if (height >= 100) {
+                    height = height
+                } else {
+                    height++ 
+                    progress.style.height = height + '%'
+                }  
+            })
+        }) 
+
+        downvote.forEach(function(btn) {
+            btn.addEventListener('click', (e) => {
+                if (height <= 5) {
+                    height = height
+                } else {
+                    height-- 
+                    progress.style.height = height + '%'
+                }  
+            })
+        }) 
+
+    }
+
     static addPosts(posts) {
         posts.forEach(post => this.addPost(post))
     }
@@ -172,7 +207,12 @@ class KaliController {
 
         })
 
-        // End on Long ass render method
+
+    // PROGRESS BAR FUNCTIONALITY 
+    
+      
+      
+    // End on Long ass render method
     }
 
 

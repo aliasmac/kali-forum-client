@@ -40,27 +40,49 @@ class Post {
         postEl.innerHTML = `
             <div id="post-id-${this.id}">
 
-            <div>
-                <span class="hvr-icon-bob" id=upvote-${this.id}><i class="fas fa-chevron-up hvr-icon" class="hvr-icon-bob" style="color: black;"></i></span>
-                <p id="score-${this.id}">${this.score}<p>
-                <span class="hvr-icon-bob" id=downvote-${this.id}><i class="fas fa-chevron-down hvr-icon" class="hvr-icon-bob" style="color: black;"></i></span>
-            </div>    
+            <div class="visible-section">
 
-                <h3>Feeling: ${this.title}</h3>
-                <p id="lowdown-${this.id}">The lowdown: ${this.content}</P>
-                <div>
-                    <img src="${this.media_element}" >
+                <div class="visible-main">
+                    <div class="score">
+                        <span class="hvr-icon-bob" id=upvote-${this.id}><i class="fas fa-chevron-up hvr-icon upvote" class="hvr-icon-bob" style="color: black;"></i></span>
+                        <p id="score-${this.id}">${this.score}<p>
+                        <span class="hvr-icon-bob" id=downvote-${this.id}><i class="fas fa-chevron-down hvr-icon downvote" class="hvr-icon-bob" style="color: black;"></i></span>
+                    </div>
+                    
+                    <div class="feelings-text">
+
+                        <p class="posted-by">Posted by: ${postAuthor.name} at: ${time}, on ${date} </p> 
+
+                        <div class="feelings-content">
+                            <div class="random">
+                                <h3>Feeling: ${this.title}</h3>
+                                <p id="lowdown-${this.id}">${this.content}</p>
+                            </div>
+                            <div class="gif-div">
+                                <img src="${this.media_element}" >
+                            </div>
+                        </div>
+
+                        <div class="forum-icons">
+                            <div>
+                                <span id="comment-btn-${this.id}" class="comment-btn"><i class="far fa-comment-alt" style="color: purple"></i></span> 
+                            </div>
+                            <div class="forum-edit-icon">
+                                <span id="edit-btn-${this.id}" class="edit-btn"><i class="far fa-edit" style="color: purple"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
                 </div>
-                <p>Posted by: ${postAuthor.name}, at: ${time}, on ${date} </p> 
-
-                <button id="comment-btn-${this.id}" class="comment-btn">View comments!</button>
-                <button id="edit-btn-${this.id}" class="edit-btn">Edit your post</button>
+                              
+            </div>    
             
                 <div class="accordion-content" id="accordion-${this.id}">
                     <div id=comment-container-${this.id}>${this.renderAllComments()}</div>
                     <div>
                         <form id="leave-comment-form-${this.id}">
-                            <p>Add your own comment!</p>
+                            <p class="join-convo">Join the conversation...</p>
                             <select id="leave-comment-select-${this.id}">
                             </select>
                             <input type="text" id="title-input-${this.id}" ></input> 
@@ -73,18 +95,18 @@ class Post {
 
                     <form id="edit-form-${this.id}">
                         <div>
-                            Title:
+                            <p>Title:</p> 
                             <input type="text" id="edit-title-input-${this.id}" placeholder="${this.title}"></input>
                         </div>
                         <div>
-                            Feeling: 
+                            <p>Feeling:</p>
                             <input type="text" id="feeling-input-${this.id}" placeholder="${this.content}"></input>
                         </div>
                         <div>
-                            Gif:       
+                            <p>Gif:</p>     
                             <input type="text" id="media-input-${this.id}" placeholder="${this.media_element}"></input>  
                         </div>
-                        <input type="submit" value="Edit comment">
+                        <input class="edit-form-button" type="submit" value="Edit comment">
                     </form>
 
                 </div>
@@ -99,3 +121,5 @@ class Post {
 
 }
 
+{/* <button id="comment-btn-${this.id}" class="comment-btn">View comments!</button>
+<button id="edit-btn-${this.id}" class="edit-btn">Edit your post</button> */}
