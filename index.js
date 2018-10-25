@@ -82,7 +82,7 @@ feelingsForm.addEventListener('submit', (e) => {
     API.createPost(feelingsObject)
         .then(resp => {      
             KaliController.addPost(resp)
-            console.log(resp)
+            renderLightbox()
         })
 
 })
