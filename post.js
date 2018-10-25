@@ -8,6 +8,8 @@ class Post {
         this.author_id = postData.author_id
         this.comments = postData.comments
         this.score = postData.score
+        this.created_at = postData.created_at
+        this.updated_at = postData.updated_at
     }
 
     renderAllComments () {
@@ -30,6 +32,9 @@ class Post {
         const postAuthor = User.findById(this.author_id)
         // https://media1.giphy.com/media/RgpuFRi3bzuGA/giphy.gif
 
+        const time = this.created_at.split("T")[1].split(".")[0]
+        const date = this.created_at.split("T")[0]
+
         const postEl = document.createElement('div')
         postEl.className = 'post-panel'
         postEl.innerHTML = `
@@ -46,7 +51,7 @@ class Post {
                 <div>
                     <img src="${this.media_element}" >
                 </div>
-                <p>Posted by: ${postAuthor.name}, from ${postAuthor.location}</p> 
+                <p>Posted by: ${postAuthor.name}, at: ${time}, on ${date} </p> 
 
                 <button id="comment-btn-${this.id}" class="comment-btn">View comments!</button>
                 <button id="edit-btn-${this.id}" class="edit-btn">Edit your post</button>

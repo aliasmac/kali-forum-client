@@ -16,69 +16,71 @@
 </head>
 <body>
     <header>
-        <h1>Flatiron Feelings Forum</h1>
+        <h1>Feeeelingzzz</h1>
         <nav>
-            <span>Search</span>
-            <span>Home</span> 
+            <span id="search">Search</span>
+            <span id="Forum">Feeeelingzzz Forum</span> 
         </nav>     
     </header>
 
-    <form id="new-user-form">
-        <label for="new-user">Create username:</label>
-        <input type="text" id="new-user-name" placeholder="Black Eyed Peas">
-        <button type="submit">Submit</button>
-    </form>
-
-    <form id="feelings-form">
-
-            <div class="form-group"></div>
-                <select name="users" form="user-form" id="feeling-name-select">        
-                </select>
-            </div>
-
-            <div class="form-group">
-                    <label for="Author">Title:</label>
-                    <input type="text" class="form-control" id="title-input" placeholder="Give your feeling a name">
-                    
+    <!-- FORMS SECTION -->
+    <div class="forms-div">
+        <form id="new-user-form">
+            <label for="new-user">Create username:</label>
+            <input type="text" id="new-user-name" placeholder="Black Eyed Peas">
+            <button type="submit">Submit</button>
+        </form>
+    
+        <form id="feelings-form">
+    
+                <div class="form-group"></div>
+                    <select name="users" form="user-form" id="feeling-name-select">        
+                    </select>
                 </div>
-
-            <div class="form-group">
-                <label for="Author">Feelings:</label>
-                <input type="text" class="form-control" id="feeling-input" placeholder="I got a feeling">
-            </div>
-
-            <div class="form-group">
-                <label for="Author">Express yourself:</label>
-                <input type="text" class="form-control" id="media-input" placeholder="Enter a gif">
-            </div>    
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-
-    </form>
-
+    
+                <div class="form-group">
+                        <label for="Author">Title:</label>
+                        <input type="text" class="form-control" id="title-input" placeholder="Give your feeling a name">
+                        
+                    </div>
+    
+                <div class="form-group">
+                    <label for="Author">Feelings:</label>
+                    <input type="text" class="form-control" id="feeling-input" placeholder="I got a feeling">
+                </div>
+    
+                <div class="form-group">
+                    <label for="Author">Express yourself:</label>
+                    <input type="text" class="form-control" id="media-input" placeholder="Enter a gif">
+                </div>    
+    
+                <button type="submit" class="btn btn-primary">Submit</button>
+    
+        </form>
+    </div>
+    
+    <!-- POSTS SECTION -->
     <div class="posts-div">
 
         <div id="accordion-main">
             <!-- Posts go inside here -->
 
         </div>
-
-        <div class="search-area">
-            <form id="search-form">
-                <input name="search" type="text" id="user-input" required>
-            </form>
-            
-            <div class="gifs">
-                <tbody id="gifs-here">
-        
-                </tbody>
-            </div>        
-        </div>
-
     </div>
 
+    <!-- SEARCH SECTION     -->
+    <div class="search-area">
+        <form id="search-form">
+            <input name="search" type="text" id="user-input" required>
+        </form>
+        
+        <div class="gifs">
+            <tbody id="gifs-here">
     
-    
+            </tbody>
+        </div>        
+    </div>
+
     
 </body>
 </html>
