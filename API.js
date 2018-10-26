@@ -75,6 +75,12 @@ class API {
       }).then(resp => resp.json())
     }
 
+    static deletePost (id) {
+      return fetch(`${this.commentsUrl}/${id}`, {
+          method: 'DELETE'
+      })
+    }
+
 
   }
   

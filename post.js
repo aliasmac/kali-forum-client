@@ -14,24 +14,32 @@ class Post {
 
     renderAllComments () {
 
-        let comments = [] 
-        let allComments = []
-        this.comments.forEach(c => comments.push(c))
-        
-        for (const el of comments) {
+        // let comments = [] 
+        // let allComments = []
+        // this.comments.forEach(c => comments.push(c))
+        let commentsAp = '';
+
+        for (const el of this.comments) {
             const commentor = User.findById(parseInt(el.user_id))   
-            allComments.push(`<p><strong>${commentor.name}</strong> - ${el.content}</p>`) 
+            commentsAp += `
+            <div class="delete-comment" id="comment-div-${el.id}">
+            <p><strong>${commentor.name}</strong> - ${el.content}</p>
+            <i class="fas fa-trash-alt" id="delete-${el.id}"></i>
+            </div>
+            `
+            
+            // const deleteBtn = document.getElementById(`delete-${this.id}`)
+            
         }   
 
-        return allComments
+        return commentsAp
 
     }
 
     renderPost () {
         
         const postAuthor = User.findById(this.author_id)
-        // https://media1.giphy.com/media/RgpuFRi3bzuGA/giphy.gif
-
+        
         const time = this.created_at.split("T")[1].split(".")[0]
         const date = this.created_at.split("T")[0]
 

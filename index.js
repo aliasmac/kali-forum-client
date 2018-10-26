@@ -12,6 +12,7 @@ document.addEventListener('click', (e) => {
     const search = document.getElementById('search-area-main')
     const signUpForm = document.getElementById('new-user-form')
     const feelingzzForm = document.getElementById('feelings-form')
+    // const accordianMain = document.getElementById('accordian-main')
 
 
     if (e.target.id === "search") {
@@ -28,30 +29,46 @@ document.addEventListener('click', (e) => {
         
     }
 
+    // if (e.target.id === "see-heading") {
+    //     forms.style.display = 'none'
+    //     search.style.display = 'none'
+    //     posts.style.display = 'block'
+
+    // }
+
 
     if (e.target.id === "sign-up") {
-        if (signUpForm.style.display === "none") {
-            signUpForm.style.display = "block"
-        } else {
-            signUpForm.style.display = "none"
-        }   
+        signUpForm.classList.toggle("visible") 
+        
     }
 
     if (e.target.id === "share") {
-        if (feelingzzForm.style.display = "none") {
-            feelingzzForm.style.display = "flex"
-        } else {
-            feelingzzForm.style.display = "none"
-        }
-    }
-
-    // Feeeelingzzz progress bar
-
+        feelingzzForm.classList.toggle("visible")
     
-
-
+    }
+ 
+    
+    
 })
 
+// Smiley link to search 
+    const forms1 = document.getElementById('forms-div')
+    const posts1 = document.getElementById('posts-div')
+    const search1 = document.getElementById('search-area-main')
+    const smiley = document.getElementById('gif-search-side')
+
+    smiley.addEventListener('click', (e) => {
+        if (search1.style.display === "none") {
+            forms1.style.display = 'none'
+            posts1.style.display = 'none'
+            search1.style.display = 'block'
+        } else {
+            forms1.style.display = 'block'
+            posts1.style.display = 'block'
+            search1.style.display = 'none'
+        }
+        
+    })
 
 
 // FORM FUNCTIONALITY 
@@ -103,7 +120,7 @@ feelingsForm.addEventListener('submit', (e) => {
     const feelingsObject = {
         author_id: userSelect.value,
         title: titleInputEl.value,
-        feelings: feelingInput.value,
+        content: feelingInput.value,
         media_element: mediaInput.value,
         score: 0
     } 
@@ -150,7 +167,7 @@ searchForm.addEventListener('keyup', function(e) {
                 gifs.forEach(gif =>
                     output +=
                     `<div class="gif-result" >
-                        <span> <a href="${gif.images.original.url}" target="_blank"><img src="${gif.images.fixed_width.url}" class="gif"></a></span>
+                        <span> <a href="${gif.images.original.url}" target="_blank"><img src="${gif.images.fixed_height_small.url}" class="gif"></a></span>
                         <div>
                             <input type="text" value="${gif.images.fixed_width.url}" id="img-url">
                         </div>

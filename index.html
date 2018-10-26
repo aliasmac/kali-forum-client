@@ -22,12 +22,19 @@
     </head>
 
     <body>
+        <audio id="myAudio">
+            <source src="feeling.mp3" type="audio/ogg">
+        </audio>
+
+        
+
+
 
         <!-- MAIN SECTION -->
         <div>
             <header>
                 <div class="nav-elements">
-                    <h1 >Feeeelingzzz</h1>
+                    <h1 id="logo">Feeeelingzzz</h1>
                     <nav>
                         <span id="forum">Forum</span> 
                         <span id="search">Search</span>
@@ -40,13 +47,18 @@
 
             <div id="gif-search-side">
                 <div><i class="far fa-smile fa-4x" style="color: #673493;"></i></div>
-            </div>    
+            </div> 
 
-            <div id="feelings-progress-bar">
-                <div id="progress"></div>
-            </div>
+            <!-- FEELOMETER -->
+            <div>
+                <h3 id="feelometer-heading">Feelometer</h3>
+                <div id="feelings-progress-bar">
+                    <div id="progress"></div>
+                </div>
+            </div>  
 
                 <!-- FORMS SECTION -->
+            <div class="main-section">
                 <div id="forms-div">
 
                         <div id="signup-block">
@@ -54,7 +66,7 @@
                             <form id="new-user-form">
                                 <div>
                                     <label for="new-user">Create username:</label><br>
-                                    <input type="text" id="new-user-name" placeholder="Black Eyed Peas">
+                                    <input type="text" id="new-user-name" placeholder="Black Eyed Peas" required>
                                 </div>
                                 <button type="submit">Submit</button>
                             </form>
@@ -69,17 +81,17 @@
                     
                                 <div>
                                     <label for="Author">Title:</label><br>   
-                                    <input type="text" class="form-control" id="title-input" placeholder="Give your feeling a name">
+                                    <input type="text" class="form-control" id="title-input" placeholder="Give your feeling a name" required>
                                 </div>
                             
                                 <div>
                                     <label for="Author">Feelings:</label><br> 
-                                    <input type="text" class="form-control" id="feeling-input" placeholder="I got a feeling">
+                                    <input type="text" class="form-control" id="feeling-input" placeholder="I got a feeling" required>
                                 </div>
                             
                                 <div>
                                     <label for="Author">Express yourself:</label><br> 
-                                    <input type="text" class="form-control" id="media-input" placeholder="Enter a gif">
+                                    <input type="text" class="form-control" id="media-input" placeholder="Enter a gif" required>
                                 </div>    
                                 
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -92,7 +104,7 @@
                 <!-- POSTS SECTION -->
                 
                 <div id="posts-div">
-                    <h2>Seeee the Feeeelingzzz...</h2>
+                    <h2 id="see-heading">Seeee the Feeeelingzzz...</h2>
             
                     <div id="accordion-main">
                         <!-- Posts go inside here -->
@@ -100,6 +112,7 @@
                     </div>
             
                 </div>
+            </div>
             
                 <!-- SEARCH SECTION     -->
                 <div id="search-area-main">

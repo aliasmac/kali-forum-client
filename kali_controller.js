@@ -3,7 +3,23 @@ class KaliController {
     static init() {
         API.getPosts()
             .then(post => this.addPosts(post))
-            .then(() => KaliController.upvoteEventListener())
+            .then(function() {
+                KaliController.upvoteEventListener()
+
+                // DELETE FUNCTION FOR EXISITNG BUTTONS
+                const allComms = document.querySelectorAll('.delete-comment')
+                
+                allComms.forEach(function(com) {
+                    // console.log(com.querySelector('i'))
+                    const deleteButton = com.querySelector('i')
+
+                    deleteButton.addEventListener('click', (e) => {
+                        com.remove()
+                        API.deletePost(parseInt(com.getAttribute('id').split('-')[2]))
+                    })
+                })
+        
+            })
 
         API.getUsers()
             .then(user => this.addUsers(user))
@@ -19,25 +35,28 @@ class KaliController {
         const upvote = document.querySelectorAll('.upvote')
         const downvote = document.querySelectorAll('.downvote')
         const progress = document.getElementById('progress')
-        let height = 1
+        let height = 100
+        const playSong = document.getElementById("myAudio")
 
         upvote.forEach(function(btn) {
             btn.addEventListener('click', (e) => {
-                if (height >= 100) {
+                if (height <= 0) {
                     height = height
+                    playSong.play()
                 } else {
-                    height++ 
+                    height -= 2
                     progress.style.height = height + '%'
                 }  
             })
         }) 
+        
 
         downvote.forEach(function(btn) {
             btn.addEventListener('click', (e) => {
-                if (height <= 5) {
+                if (height >= 5) {
                     height = height
                 } else {
-                    height-- 
+                    height += 2
                     progress.style.height = height + '%'
                 }  
             })
@@ -106,14 +125,40 @@ class KaliController {
  
                     API.addComment(comment)
                         .then(function(resp) {
+                            console.log(resp)
+
                             const allComments = document.getElementById(`comment-container-${post.id}`)
                             const commentor = User.findById(parseInt(comment.user_id)) 
                             const newComment = document.createElement('p')
-                            newComment.innerHTML = `<strong>${commentor.name}</strong> - ${resp.content}`
+                            newComment.innerHTML = `
+                                <div class="delete-comment id="comment-div-${resp.id}">
+                                <p><strong>${commentor.name}</strong> - ${resp.content}</p>
+                                <i class="fas fa-trash-alt" id="delete-${resp.id}"></i>
+                                </div>
+                            `
+                            
                             allComments.append(newComment)
+
+                            // DELETE BUTTON
+
+                            const deleteBtn = document.getElementById(`delete-${resp.id}`)
+
+                            deleteBtn.addEventListener('click', (e) => {
+                                deleteBtn.parentElement.remove()
+                                API.deletePost(resp.id)
+                            })
                         })
 
-                })   
+                }) 
+                
+                // DELETE BUTTON
+                // const deleteBtn = document.getElementById(`delete-${this.id}`)
+                // const commentDiv = document.getElementById(`comment-div-${this.id}`)
+
+                // deleteBtn.addEventListener('click', (e) => {
+                //     commentDiv.remove()
+                //     API.deletePost(this.id)
+                // })
 
             }
         })
@@ -179,14 +224,16 @@ class KaliController {
       
         })
 
-        // Upvote Downvote Funtionality 
+        // // DELETE BUTTON
+        // const deleteBtn = document.getElementById(`delete-${this.id}`)
+        //     const commentDiv = document.getElementById(`comment-div-${this.id}`)
 
-        // Add score attribute to the post 
-        // select the socre buttons 
-        // add event listeners to them 
-        // change the score 
-        // persist to database 
-        
+        //     deleteBtn.addEventListener('click', (e) => {
+        //         commentDiv.remove()
+        //         API.deletePost(this.id)
+        //     })
+
+        // Upvote Downvote Funtionality 
 
         
         const upvoteBtn = document.getElementById(`upvote-${post.id}`)
@@ -214,9 +261,6 @@ class KaliController {
       
     // End on Long ass render method
     }
-
-
-
 
 
     // Users 
